@@ -1,0 +1,97 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "employee",
+            "otherEntityName": "employee",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "surname",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "asset"
+        },
+        {
+            "relationshipName": "ot",
+            "otherEntityName": "ot",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "asset"
+        },
+        {
+            "relationshipName": "pt",
+            "otherEntityName": "pt",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "asset"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "inventoryCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "registrationCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "barcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "symbol",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "purchaseDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDateOfUse",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "liquidationDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "startDateOfUse",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "AssetStatus",
+            "fieldValues": "IN_USE, DELETED, LIQUIDATED, SOLD_OUT, ACQUIRED"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "assetGroup",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170407174117",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "asset",
+    "pagination": "pagination"
+}

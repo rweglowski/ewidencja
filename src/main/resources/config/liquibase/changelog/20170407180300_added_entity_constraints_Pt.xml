@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Pt.
+    -->
+    <changeSet id="20170407180300-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="asset_id"
+                                 baseTableName="pt"
+                                 constraintName="fk_pt_asset_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="asset"/>
+
+        <addForeignKeyConstraint baseColumnNames="forwarder_id"
+                                 baseTableName="pt"
+                                 constraintName="fk_pt_forwarder_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="pts_id"
+                                 baseTableName="pt_recipient"
+                                 constraintName="fk_pt_recipient_pts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pt"/>
+        <addForeignKeyConstraint baseColumnNames="recipients_id"
+                                 baseTableName="pt_recipient"
+                                 constraintName="fk_pt_recipient_recipients_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+        
+    </changeSet>
+</databaseChangeLog>

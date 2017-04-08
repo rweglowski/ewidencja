@@ -1,0 +1,45 @@
+
+<div>
+    <h2><span>Ot</span> {{vm.ot.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span>Place</span></dt>
+        <dd>
+            <span>{{vm.ot.place}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.ot.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.ot.name}}</span>
+        </dd>
+        <dt><span>Path</span></dt>
+        <dd>
+            <span>{{vm.ot.path}}</span>
+        </dd>
+        <dt><span>Asset</span></dt>
+        <dd>
+            <a ui-sref="asset-detail({id:vm.ot.asset.id})">{{vm.ot.asset.inventoryCode}}</a>
+        </dd>
+        <dt><span>Employee</span></dt>
+        <dd>
+            <span ng-repeat="employee in vm.ot.employees">
+                <a ui-sref="employee-detail({id: employee.id})">{{employee.surname}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ot-detail.edit({id:vm.ot.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

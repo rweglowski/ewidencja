@@ -1,0 +1,76 @@
+<div>
+    <h2>Pts</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="pt.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Pt
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Date</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>Pt Name</span></th>
+                    <th><span>Path</span></th>
+                    <th><span>Asset</span></th>
+                    <th><span>Forwarder</span></th>
+                    <th><span>Recipient</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pt in vm.pts track by pt.id">
+                    <td><a ui-sref="pt-detail({id:pt.id})">{{pt.id}}</a></td>
+                        <td>{{pt.date | date:'mediumDate'}}</td>
+                    <td>{{pt.name}}</td>
+                    <td>{{pt.ptName}}</td>
+                    <td>{{pt.path}}</td>
+                    <td>
+                        <a ui-sref="asset-detail({id:pt.asset.id})">{{pt.asset.inventoryCode}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="employee-detail({id:pt.forwarder.id})">{{pt.forwarder.surname}}</a>
+                    </td>
+                    <td>
+                        <span ng-repeat="recipient in pt.recipients">
+                            <a class="form-control-static" ui-sref="employee-detail({id: recipient.id})">{{recipient.surname}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="pt-detail({id:pt.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="pt.edit({id:pt.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="pt.delete({id:pt.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

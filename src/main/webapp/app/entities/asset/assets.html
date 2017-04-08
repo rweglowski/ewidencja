@@ -1,0 +1,84 @@
+<div>
+    <h2>Assets</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="asset.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Asset
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="inventoryCode"><span>Inventory Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="registrationCode"><span>Registration Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="barcode"><span>Barcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="symbol"><span>Symbol</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="purchaseDate"><span>Purchase Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDateOfUse"><span>End Date Of Use</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="liquidationDate"><span>Liquidation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDateOfUse"><span>Start Date Of Use</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="value"><span>Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assetGroup"><span>Asset Group</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="asset in vm.assets track by asset.id">
+                    <td><a ui-sref="asset-detail({id:asset.id})">{{asset.id}}</a></td>
+                    <td>{{asset.name}}</td>
+                    <td>{{asset.inventoryCode}}</td>
+                    <td>{{asset.registrationCode}}</td>
+                    <td>{{asset.barcode}}</td>
+                    <td>{{asset.symbol}}</td>
+                        <td>{{asset.purchaseDate | date:'mediumDate'}}</td>
+                        <td>{{asset.endDateOfUse | date:'mediumDate'}}</td>
+                        <td>{{asset.liquidationDate | date:'mediumDate'}}</td>
+                        <td>{{asset.startDateOfUse | date:'mediumDate'}}</td>
+                    <td>{{asset.status}}</td>
+                    <td>{{asset.description}}</td>
+                    <td>{{asset.value}}</td>
+                    <td>{{asset.assetGroup}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="asset-detail({id:asset.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="asset.edit({id:asset.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="asset.delete({id:asset.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Ot.
+    -->
+    <changeSet id="20170407180535-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="asset_id"
+                                 baseTableName="ot"
+                                 constraintName="fk_ot_asset_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="asset"/>
+
+        <addForeignKeyConstraint baseColumnNames="ots_id"
+                                 baseTableName="ot_employee"
+                                 constraintName="fk_ot_employee_ots_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ot"/>
+        <addForeignKeyConstraint baseColumnNames="employees_id"
+                                 baseTableName="ot_employee"
+                                 constraintName="fk_ot_employee_employees_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+        
+    </changeSet>
+</databaseChangeLog>

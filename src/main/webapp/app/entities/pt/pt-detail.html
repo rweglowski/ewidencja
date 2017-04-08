@@ -1,0 +1,49 @@
+
+<div>
+    <h2><span>Pt</span> {{vm.pt.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.pt.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.pt.name}}</span>
+        </dd>
+        <dt><span>Pt Name</span></dt>
+        <dd>
+            <span>{{vm.pt.ptName}}</span>
+        </dd>
+        <dt><span>Path</span></dt>
+        <dd>
+            <span>{{vm.pt.path}}</span>
+        </dd>
+        <dt><span>Asset</span></dt>
+        <dd>
+            <a ui-sref="asset-detail({id:vm.pt.asset.id})">{{vm.pt.asset.inventoryCode}}</a>
+        </dd>
+        <dt><span>Forwarder</span></dt>
+        <dd>
+            <a ui-sref="employee-detail({id:vm.pt.forwarder.id})">{{vm.pt.forwarder.surname}}</a>
+        </dd>
+        <dt><span>Recipient</span></dt>
+        <dd>
+            <span ng-repeat="recipient in vm.pt.recipients">
+                <a ui-sref="employee-detail({id: recipient.id})">{{recipient.surname}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="pt-detail.edit({id:vm.pt.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

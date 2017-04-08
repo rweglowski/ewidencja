@@ -1,0 +1,77 @@
+
+<div>
+    <h2><span>Asset</span> {{vm.asset.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.asset.name}}</span>
+        </dd>
+        <dt><span>Inventory Code</span></dt>
+        <dd>
+            <span>{{vm.asset.inventoryCode}}</span>
+        </dd>
+        <dt><span>Registration Code</span></dt>
+        <dd>
+            <span>{{vm.asset.registrationCode}}</span>
+        </dd>
+        <dt><span>Barcode</span></dt>
+        <dd>
+            <span>{{vm.asset.barcode}}</span>
+        </dd>
+        <dt><span>Symbol</span></dt>
+        <dd>
+            <span>{{vm.asset.symbol}}</span>
+        </dd>
+        <dt><span>Purchase Date</span></dt>
+        <dd>
+            <span>{{vm.asset.purchaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>End Date Of Use</span></dt>
+        <dd>
+            <span>{{vm.asset.endDateOfUse | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Liquidation Date</span></dt>
+        <dd>
+            <span>{{vm.asset.liquidationDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Start Date Of Use</span></dt>
+        <dd>
+            <span>{{vm.asset.startDateOfUse | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{vm.asset.status}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.asset.description}}</span>
+        </dd>
+        <dt><span>Value</span></dt>
+        <dd>
+            <span>{{vm.asset.value}}</span>
+        </dd>
+        <dt><span>Asset Group</span></dt>
+        <dd>
+            <span>{{vm.asset.assetGroup}}</span>
+        </dd>
+        <dt><span>Employee</span></dt>
+        <dd>
+            <span ng-repeat="employee in vm.asset.employees">
+                <a ui-sref="employee-detail({id: employee.id})">{{employee.surname}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="asset-detail.edit({id:vm.asset.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

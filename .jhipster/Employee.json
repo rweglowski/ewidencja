@@ -1,0 +1,62 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "asset",
+            "otherEntityName": "asset",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipName": "ot",
+            "otherEntityName": "ot",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipName": "forwarder",
+            "otherEntityName": "pt",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "forwarder"
+        },
+        {
+            "relationshipName": "ptRecipients",
+            "otherEntityName": "pt",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "recipients"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "surname",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "EmployeeStatus",
+            "fieldValues": "ACTIVE, DELETED"
+        }
+    ],
+    "changelogDate": "20170407175953",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "employee",
+    "pagination": "no"
+}
