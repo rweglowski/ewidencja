@@ -96,9 +96,8 @@
                         entity: function () {
                             return {
                                 date: null,
-                                name: null,
-                                ptName: null,
                                 path: null,
+                                name: null,
                                 id: null
                             };
                         }

@@ -1,5 +1,7 @@
 package com.home.service;
 
+import com.home.domain.Employee;
+import com.home.domain.Ot;
 import com.home.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -104,5 +106,27 @@ public class MailService {
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendPtPdf(Employee employee){
+        log.debug("Sending PT pdf to "+employee.getEmail());
+        Context context = new Context();
+        context.setVariable("employee", employee);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process("ptPdfEmail", context);
+        String subject = "PT Document";
+        sendEmail(employee.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendOtPdf(Employee employee){
+        log.debug("Sending OT pdf to "+employee.getEmail());
+        Context context = new Context();
+        context.setVariable("employee", employee);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process("otPdfEmail", context);
+        String subject = "OT Document";
+        sendEmail(employee.getEmail(), subject, content, false, true);
     }
 }

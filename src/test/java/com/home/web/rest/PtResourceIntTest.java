@@ -42,14 +42,11 @@ public class PtResourceIntTest {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PT_NAME = "BBBBBBBBBB";
-
     private static final String DEFAULT_PATH = "AAAAAAAAAA";
     private static final String UPDATED_PATH = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private PtRepository ptRepository;
@@ -89,9 +86,8 @@ public class PtResourceIntTest {
     public static Pt createEntity(EntityManager em) {
         Pt pt = new Pt()
                 .date(DEFAULT_DATE)
-                .name(DEFAULT_NAME)
-                .ptName(DEFAULT_PT_NAME)
-                .path(DEFAULT_PATH);
+                .path(DEFAULT_PATH)
+                .name(DEFAULT_NAME);
         return pt;
     }
 
@@ -117,9 +113,8 @@ public class PtResourceIntTest {
         assertThat(ptList).hasSize(databaseSizeBeforeCreate + 1);
         Pt testPt = ptList.get(ptList.size() - 1);
         assertThat(testPt.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testPt.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testPt.getPtName()).isEqualTo(DEFAULT_PT_NAME);
         assertThat(testPt.getPath()).isEqualTo(DEFAULT_PATH);
+        assertThat(testPt.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -162,24 +157,6 @@ public class PtResourceIntTest {
 
     @Test
     @Transactional
-    public void checkPtNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = ptRepository.findAll().size();
-        // set the field null
-        pt.setPtName(null);
-
-        // Create the Pt, which fails.
-
-        restPtMockMvc.perform(post("/api/pts")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(pt)))
-            .andExpect(status().isBadRequest());
-
-        List<Pt> ptList = ptRepository.findAll();
-        assertThat(ptList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllPts() throws Exception {
         // Initialize the database
         ptRepository.saveAndFlush(pt);
@@ -190,9 +167,8 @@ public class PtResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(pt.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].ptName").value(hasItem(DEFAULT_PT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())));
+            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
 
     @Test
@@ -207,9 +183,8 @@ public class PtResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(pt.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.ptName").value(DEFAULT_PT_NAME.toString()))
-            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()));
+            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -231,9 +206,8 @@ public class PtResourceIntTest {
         Pt updatedPt = ptRepository.findOne(pt.getId());
         updatedPt
                 .date(UPDATED_DATE)
-                .name(UPDATED_NAME)
-                .ptName(UPDATED_PT_NAME)
-                .path(UPDATED_PATH);
+                .path(UPDATED_PATH)
+                .name(UPDATED_NAME);
 
         restPtMockMvc.perform(put("/api/pts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -245,9 +219,8 @@ public class PtResourceIntTest {
         assertThat(ptList).hasSize(databaseSizeBeforeUpdate);
         Pt testPt = ptList.get(ptList.size() - 1);
         assertThat(testPt.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testPt.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testPt.getPtName()).isEqualTo(UPDATED_PT_NAME);
         assertThat(testPt.getPath()).isEqualTo(UPDATED_PATH);
+        assertThat(testPt.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

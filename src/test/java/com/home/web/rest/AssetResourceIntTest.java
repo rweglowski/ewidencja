@@ -40,12 +40,6 @@ import com.home.domain.enumeration.AssetStatus;
 @SpringBootTest(classes = EwidencjaApp.class)
 public class AssetResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_INVENTORY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_INVENTORY_CODE = "BBBBBBBBBB";
-
     private static final String DEFAULT_REGISTRATION_CODE = "AAAAAAAAAA";
     private static final String UPDATED_REGISTRATION_CODE = "BBBBBBBBBB";
 
@@ -78,6 +72,12 @@ public class AssetResourceIntTest {
 
     private static final String DEFAULT_ASSET_GROUP = "AAAAAAAAAA";
     private static final String UPDATED_ASSET_GROUP = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_INVENTORY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_INVENTORY_CODE = "BBBBBBBBBB";
 
     @Autowired
     private AssetRepository assetRepository;
@@ -116,8 +116,6 @@ public class AssetResourceIntTest {
      */
     public static Asset createEntity(EntityManager em) {
         Asset asset = new Asset()
-                .name(DEFAULT_NAME)
-                .inventoryCode(DEFAULT_INVENTORY_CODE)
                 .registrationCode(DEFAULT_REGISTRATION_CODE)
                 .barcode(DEFAULT_BARCODE)
                 .symbol(DEFAULT_SYMBOL)
@@ -128,7 +126,9 @@ public class AssetResourceIntTest {
                 .status(DEFAULT_STATUS)
                 .description(DEFAULT_DESCRIPTION)
                 .value(DEFAULT_VALUE)
-                .assetGroup(DEFAULT_ASSET_GROUP);
+                .assetGroup(DEFAULT_ASSET_GROUP)
+                .name(DEFAULT_NAME)
+                .inventoryCode(DEFAULT_INVENTORY_CODE);
         return asset;
     }
 
@@ -153,8 +153,6 @@ public class AssetResourceIntTest {
         List<Asset> assetList = assetRepository.findAll();
         assertThat(assetList).hasSize(databaseSizeBeforeCreate + 1);
         Asset testAsset = assetList.get(assetList.size() - 1);
-        assertThat(testAsset.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testAsset.getInventoryCode()).isEqualTo(DEFAULT_INVENTORY_CODE);
         assertThat(testAsset.getRegistrationCode()).isEqualTo(DEFAULT_REGISTRATION_CODE);
         assertThat(testAsset.getBarcode()).isEqualTo(DEFAULT_BARCODE);
         assertThat(testAsset.getSymbol()).isEqualTo(DEFAULT_SYMBOL);
@@ -166,6 +164,8 @@ public class AssetResourceIntTest {
         assertThat(testAsset.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testAsset.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testAsset.getAssetGroup()).isEqualTo(DEFAULT_ASSET_GROUP);
+        assertThat(testAsset.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testAsset.getInventoryCode()).isEqualTo(DEFAULT_INVENTORY_CODE);
     }
 
     @Test
@@ -186,24 +186,6 @@ public class AssetResourceIntTest {
         // Validate the Alice in the database
         List<Asset> assetList = assetRepository.findAll();
         assertThat(assetList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkInventoryCodeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = assetRepository.findAll().size();
-        // set the field null
-        asset.setInventoryCode(null);
-
-        // Create the Asset, which fails.
-
-        restAssetMockMvc.perform(post("/api/assets")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(asset)))
-            .andExpect(status().isBadRequest());
-
-        List<Asset> assetList = assetRepository.findAll();
-        assertThat(assetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -244,6 +226,24 @@ public class AssetResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = assetRepository.findAll().size();
+        // set the field null
+        asset.setName(null);
+
+        // Create the Asset, which fails.
+
+        restAssetMockMvc.perform(post("/api/assets")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(asset)))
+            .andExpect(status().isBadRequest());
+
+        List<Asset> assetList = assetRepository.findAll();
+        assertThat(assetList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllAssets() throws Exception {
         // Initialize the database
         assetRepository.saveAndFlush(asset);
@@ -253,8 +253,6 @@ public class AssetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(asset.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].inventoryCode").value(hasItem(DEFAULT_INVENTORY_CODE.toString())))
             .andExpect(jsonPath("$.[*].registrationCode").value(hasItem(DEFAULT_REGISTRATION_CODE.toString())))
             .andExpect(jsonPath("$.[*].barcode").value(hasItem(DEFAULT_BARCODE.toString())))
             .andExpect(jsonPath("$.[*].symbol").value(hasItem(DEFAULT_SYMBOL.toString())))
@@ -265,7 +263,9 @@ public class AssetResourceIntTest {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.intValue())))
-            .andExpect(jsonPath("$.[*].assetGroup").value(hasItem(DEFAULT_ASSET_GROUP.toString())));
+            .andExpect(jsonPath("$.[*].assetGroup").value(hasItem(DEFAULT_ASSET_GROUP.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].inventoryCode").value(hasItem(DEFAULT_INVENTORY_CODE.toString())));
     }
 
     @Test
@@ -279,8 +279,6 @@ public class AssetResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(asset.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.inventoryCode").value(DEFAULT_INVENTORY_CODE.toString()))
             .andExpect(jsonPath("$.registrationCode").value(DEFAULT_REGISTRATION_CODE.toString()))
             .andExpect(jsonPath("$.barcode").value(DEFAULT_BARCODE.toString()))
             .andExpect(jsonPath("$.symbol").value(DEFAULT_SYMBOL.toString()))
@@ -291,7 +289,9 @@ public class AssetResourceIntTest {
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.intValue()))
-            .andExpect(jsonPath("$.assetGroup").value(DEFAULT_ASSET_GROUP.toString()));
+            .andExpect(jsonPath("$.assetGroup").value(DEFAULT_ASSET_GROUP.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.inventoryCode").value(DEFAULT_INVENTORY_CODE.toString()));
     }
 
     @Test
@@ -312,8 +312,6 @@ public class AssetResourceIntTest {
         // Update the asset
         Asset updatedAsset = assetRepository.findOne(asset.getId());
         updatedAsset
-                .name(UPDATED_NAME)
-                .inventoryCode(UPDATED_INVENTORY_CODE)
                 .registrationCode(UPDATED_REGISTRATION_CODE)
                 .barcode(UPDATED_BARCODE)
                 .symbol(UPDATED_SYMBOL)
@@ -324,7 +322,9 @@ public class AssetResourceIntTest {
                 .status(UPDATED_STATUS)
                 .description(UPDATED_DESCRIPTION)
                 .value(UPDATED_VALUE)
-                .assetGroup(UPDATED_ASSET_GROUP);
+                .assetGroup(UPDATED_ASSET_GROUP)
+                .name(UPDATED_NAME)
+                .inventoryCode(UPDATED_INVENTORY_CODE);
 
         restAssetMockMvc.perform(put("/api/assets")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -335,8 +335,6 @@ public class AssetResourceIntTest {
         List<Asset> assetList = assetRepository.findAll();
         assertThat(assetList).hasSize(databaseSizeBeforeUpdate);
         Asset testAsset = assetList.get(assetList.size() - 1);
-        assertThat(testAsset.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testAsset.getInventoryCode()).isEqualTo(UPDATED_INVENTORY_CODE);
         assertThat(testAsset.getRegistrationCode()).isEqualTo(UPDATED_REGISTRATION_CODE);
         assertThat(testAsset.getBarcode()).isEqualTo(UPDATED_BARCODE);
         assertThat(testAsset.getSymbol()).isEqualTo(UPDATED_SYMBOL);
@@ -348,6 +346,8 @@ public class AssetResourceIntTest {
         assertThat(testAsset.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testAsset.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testAsset.getAssetGroup()).isEqualTo(UPDATED_ASSET_GROUP);
+        assertThat(testAsset.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testAsset.getInventoryCode()).isEqualTo(UPDATED_INVENTORY_CODE);
     }
 
     @Test

@@ -25,16 +25,12 @@ public class Pt implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "path")
+    private String path;
+
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "pt_name", nullable = false)
-    private String ptName;
-
-    @Column(name = "path")
-    private String path;
 
     @ManyToOne
     private Asset asset;
@@ -69,32 +65,6 @@ public class Pt implements Serializable {
         this.date = date;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Pt name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPtName() {
-        return ptName;
-    }
-
-    public Pt ptName(String ptName) {
-        this.ptName = ptName;
-        return this;
-    }
-
-    public void setPtName(String ptName) {
-        this.ptName = ptName;
-    }
-
     public String getPath() {
         return path;
     }
@@ -106,6 +76,19 @@ public class Pt implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Pt name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Asset getAsset() {
@@ -184,9 +167,8 @@ public class Pt implements Serializable {
         return "Pt{" +
             "id=" + id +
             ", date='" + date + "'" +
-            ", name='" + name + "'" +
-            ", ptName='" + ptName + "'" +
             ", path='" + path + "'" +
+            ", name='" + name + "'" +
             '}';
     }
 }

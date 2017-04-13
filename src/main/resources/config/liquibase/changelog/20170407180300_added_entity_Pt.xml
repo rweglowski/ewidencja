@@ -26,16 +26,12 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="pt_name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
             <column name="path" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
 
             <column name="asset_id" type="bigint">

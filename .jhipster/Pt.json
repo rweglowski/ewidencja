@@ -28,22 +28,15 @@
             "fieldType": "LocalDate"
         },
         {
+            "fieldName": "path",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
-        },
-        {
-            "fieldName": "ptName",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "path",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20170407180300",

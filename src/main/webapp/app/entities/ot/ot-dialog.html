@@ -6,12 +6,19 @@
                 ng-click="vm.clear()">&times;</button>
         <h4 class="modal-title" id="myOtLabel">Create or edit a Ot</h4>
     </div>
+
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" ng-show="vm.ot.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.ot.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                   ng-model="vm.ot.name"
+            />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_place">Place</label>
@@ -29,19 +36,6 @@
                     </span>
                 </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.ot.name"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_path">Path</label>
-            <input type="text" class="form-control" name="path" id="field_path"
-                    ng-model="vm.ot.path"
-                    />
-        </div>
-
         <div class="form-group">
             <label for="field_asset">Asset</label>
             <select class="form-control" id="field_asset" name="asset" ng-model="vm.ot.asset" ng-options="asset as asset.inventoryCode for asset in vm.assets | orderBy:'id' track by asset.id">

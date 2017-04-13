@@ -20,9 +20,8 @@
                 <tr>
                     <th><span>ID</span></th>
                     <th><span>Date</span></th>
-                    <th><span>Name</span></th>
-                    <th><span>Pt Name</span></th>
                     <th><span>Path</span></th>
+                    <th><span>Name</span></th>
                     <th><span>Asset</span></th>
                     <th><span>Forwarder</span></th>
                     <th><span>Recipient</span></th>
@@ -33,9 +32,8 @@
                 <tr ng-repeat="pt in vm.pts track by pt.id">
                     <td><a ui-sref="pt-detail({id:pt.id})">{{pt.id}}</a></td>
                         <td>{{pt.date | date:'mediumDate'}}</td>
-                    <td>{{pt.name}}</td>
-                    <td>{{pt.ptName}}</td>
                     <td>{{pt.path}}</td>
+                    <td>{{pt.name}}</td>
                     <td>
                         <a ui-sref="asset-detail({id:pt.asset.id})">{{pt.asset.inventoryCode}}</a>
                     </td>

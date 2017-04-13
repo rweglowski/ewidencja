@@ -25,13 +25,6 @@ public class Asset implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @NotNull
-    @Column(name = "inventory_code", nullable = false)
-    private String inventoryCode;
-
     @Column(name = "registration_code")
     private String registrationCode;
 
@@ -69,6 +62,13 @@ public class Asset implements Serializable {
     @Column(name = "asset_group")
     private String assetGroup;
 
+    @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "inventory_code")
+    private String inventoryCode;
+
     @ManyToMany
     @JoinTable(name = "asset_employee",
                joinColumns = @JoinColumn(name="assets_id", referencedColumnName="id"),
@@ -89,32 +89,6 @@ public class Asset implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Asset name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInventoryCode() {
-        return inventoryCode;
-    }
-
-    public Asset inventoryCode(String inventoryCode) {
-        this.inventoryCode = inventoryCode;
-        return this;
-    }
-
-    public void setInventoryCode(String inventoryCode) {
-        this.inventoryCode = inventoryCode;
     }
 
     public String getRegistrationCode() {
@@ -260,6 +234,32 @@ public class Asset implements Serializable {
         this.assetGroup = assetGroup;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Asset name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getInventoryCode() {
+        return inventoryCode;
+    }
+
+    public Asset inventoryCode(String inventoryCode) {
+        this.inventoryCode = inventoryCode;
+        return this;
+    }
+
+    public void setInventoryCode(String inventoryCode) {
+        this.inventoryCode = inventoryCode;
+    }
+
     public Set<Employee> getEmployees() {
         return employees;
     }
@@ -347,8 +347,6 @@ public class Asset implements Serializable {
     public String toString() {
         return "Asset{" +
             "id=" + id +
-            ", name='" + name + "'" +
-            ", inventoryCode='" + inventoryCode + "'" +
             ", registrationCode='" + registrationCode + "'" +
             ", barcode='" + barcode + "'" +
             ", symbol='" + symbol + "'" +
@@ -360,6 +358,8 @@ public class Asset implements Serializable {
             ", description='" + description + "'" +
             ", value='" + value + "'" +
             ", assetGroup='" + assetGroup + "'" +
+            ", name='" + name + "'" +
+            ", inventoryCode='" + inventoryCode + "'" +
             '}';
     }
 }

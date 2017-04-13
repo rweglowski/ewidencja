@@ -3,11 +3,13 @@ package com.home.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.home.domain.Pt;
 
+import com.home.domain.PtCommandHandler;
 import com.home.repository.PtRepository;
 import com.home.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +29,11 @@ public class PtResource {
     private final Logger log = LoggerFactory.getLogger(PtResource.class);
 
     private static final String ENTITY_NAME = "pt";
-        
+
     private final PtRepository ptRepository;
+
+    @Autowired
+    private PtCommandHandler handler;
 
     public PtResource(PtRepository ptRepository) {
         this.ptRepository = ptRepository;
@@ -48,6 +53,7 @@ public class PtResource {
         if (pt.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new pt cannot already have an ID")).body(null);
         }
+        handler.handle(pt);
         Pt result = ptRepository.save(pt);
         return ResponseEntity.created(new URI("/api/pts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

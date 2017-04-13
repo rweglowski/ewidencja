@@ -22,14 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="inventory_code" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
             <column name="registration_code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -71,6 +63,14 @@
             </column>
 
             <column name="asset_group" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="inventory_code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

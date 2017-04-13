@@ -19,8 +19,6 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="inventoryCode"><span>Inventory Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="registrationCode"><span>Registration Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="barcode"><span>Barcode</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="symbol"><span>Symbol</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -32,14 +30,14 @@
                     <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="value"><span>Value</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="assetGroup"><span>Asset Group</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="inventoryCode"><span>Inventory Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="asset in vm.assets track by asset.id">
                     <td><a ui-sref="asset-detail({id:asset.id})">{{asset.id}}</a></td>
-                    <td>{{asset.name}}</td>
-                    <td>{{asset.inventoryCode}}</td>
                     <td>{{asset.registrationCode}}</td>
                     <td>{{asset.barcode}}</td>
                     <td>{{asset.symbol}}</td>
@@ -51,6 +49,8 @@
                     <td>{{asset.description}}</td>
                     <td>{{asset.value}}</td>
                     <td>{{asset.assetGroup}}</td>
+                    <td>{{asset.name}}</td>
+                    <td>{{asset.inventoryCode}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

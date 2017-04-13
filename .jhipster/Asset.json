@@ -25,17 +25,6 @@
     ],
     "fields": [
         {
-            "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "inventoryCode",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "registrationCode",
             "fieldType": "String"
         },
@@ -86,6 +75,17 @@
         },
         {
             "fieldName": "assetGroup",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "inventoryCode",
             "fieldType": "String"
         }
     ],

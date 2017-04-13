@@ -115,8 +115,6 @@
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
-                                inventoryCode: null,
                                 registrationCode: null,
                                 barcode: null,
                                 symbol: null,
@@ -128,6 +126,8 @@
                                 description: null,
                                 value: null,
                                 assetGroup: null,
+                                name: null,
+                                inventoryCode: null,
                                 id: null
                             };
                         }
