@@ -3,11 +3,14 @@ package com.home.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.home.domain.Employee;
 
+import com.home.domain.EmployeeCommandHandler;
+import com.home.domain.enumeration.EmployeeStatus;
 import com.home.repository.EmployeeRepository;
 import com.home.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +30,12 @@ public class EmployeeResource {
     private final Logger log = LoggerFactory.getLogger(EmployeeResource.class);
 
     private static final String ENTITY_NAME = "employee";
-        
+
     private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeCommandHandler handler;
+
 
     public EmployeeResource(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -48,6 +55,8 @@ public class EmployeeResource {
         if (employee.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new employee cannot already have an ID")).body(null);
         }
+
+        handler.handle(employee);
         Employee result = employeeRepository.save(employee);
         return ResponseEntity.created(new URI("/api/employees/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -113,7 +122,9 @@ public class EmployeeResource {
     @Timed
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         log.debug("REST request to delete Employee : {}", id);
-        employeeRepository.delete(id);
+        Employee employee = employeeRepository.findOne(id);
+        employee.setStatus(EmployeeStatus.DELETED);
+        employeeRepository.save(employee);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
