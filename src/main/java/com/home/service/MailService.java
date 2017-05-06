@@ -1,5 +1,6 @@
 package com.home.service;
 
+import com.home.domain.AssetEndingSoonReminder;
 import com.home.domain.Employee;
 import com.home.domain.Ot;
 import com.home.domain.User;
@@ -18,6 +19,8 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
+
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -128,5 +131,16 @@ public class MailService {
         String content = templateEngine.process("otPdfEmail", context);
         String subject = "OT Document";
         sendEmail(employee.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendAssetEndingSoonReminder(AssetEndingSoonReminder reminder){
+        log.debug("Sending asset ending reminder to "+reminder.getEmail());
+        Context context = new Context();
+        context.setVariable("reminder", reminder);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process("assetEndReminderEmail", context);
+        String subject = "Asset reminder";
+        sendEmail(reminder.getEmail(), subject, content, false, true);
     }
 }

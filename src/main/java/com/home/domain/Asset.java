@@ -69,7 +69,7 @@ public class Asset implements Serializable {
     @Column(name = "inventory_code")
     private String inventoryCode;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "asset_employee",
                joinColumns = @JoinColumn(name="assets_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="employees_id", referencedColumnName="id"))
