@@ -23,7 +23,7 @@ public class OtCommandHandler {
         pdfService.createOtPdf(ot);
 
         for(Employee employee : ot.getEmployees()){
-            //mailService.sendOtPdf(employee);
+            mailService.sendOtPdf(employee, ot.getName());
         }
 
     }

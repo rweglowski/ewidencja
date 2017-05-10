@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class OtResource {
      */
     @PostMapping("/ots")
     @Timed
-    public ResponseEntity<Ot> createOt(@RequestBody Ot ot) throws URISyntaxException {
+    public ResponseEntity<Ot> createOt(@Valid @RequestBody Ot ot) throws URISyntaxException {
         log.debug("REST request to save Ot : {}", ot);
         if (ot.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new ot cannot already have an ID")).body(null);
@@ -71,7 +72,7 @@ public class OtResource {
      */
     @PutMapping("/ots")
     @Timed
-    public ResponseEntity<Ot> updateOt(@RequestBody Ot ot) throws URISyntaxException {
+    public ResponseEntity<Ot> updateOt(@Valid @RequestBody Ot ot) throws URISyntaxException {
         log.debug("REST request to update Ot : {}", ot);
         if (ot.getId() == null) {
             return createOt(ot);

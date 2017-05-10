@@ -19,7 +19,7 @@ public class PtCommandHandler {
         pdfService.createPtPdf(pt);
 
         for(Employee recipient : pt.getRecipients()){
-            //mailService.sendPtPdf(recipient);
+            mailService.sendPtPdf(recipient, pt.getName());
         }
     }
 }

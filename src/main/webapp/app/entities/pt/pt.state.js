@@ -98,6 +98,7 @@
                                 date: null,
                                 path: null,
                                 name: null,
+                                note: null,
                                 id: null
                             };
                         }

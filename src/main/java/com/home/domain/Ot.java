@@ -2,6 +2,7 @@ package com.home.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -32,6 +33,10 @@ public class Ot implements Serializable {
 
     @Column(name = "path")
     private String path;
+
+    @NotNull
+    @Column(name = "provider", nullable = false)
+    private String provider;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -103,6 +108,19 @@ public class Ot implements Serializable {
         this.path = path;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public Ot provider(String provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
     public Asset getAsset() {
         return asset;
     }
@@ -169,6 +187,7 @@ public class Ot implements Serializable {
             ", date='" + date + "'" +
             ", name='" + name + "'" +
             ", path='" + path + "'" +
+            ", provider='" + provider + "'" +
             '}';
     }
 }

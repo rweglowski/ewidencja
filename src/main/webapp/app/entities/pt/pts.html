@@ -22,6 +22,7 @@
                     <th><span>Date</span></th>
                     <th><span>Path</span></th>
                     <th><span>Name</span></th>
+                    <th><span>Note</span></th>
                     <th><span>Asset</span></th>
                     <th><span>Forwarder</span></th>
                     <th><span>Recipient</span></th>
@@ -34,6 +35,7 @@
                         <td>{{pt.date | date:'mediumDate'}}</td>
                     <td>{{pt.path}}</td>
                     <td>{{pt.name}}</td>
+                    <td>{{pt.note}}</td>
                     <td>
                         <a ui-sref="asset-detail({id:pt.asset.id})">{{pt.asset.inventoryCode}}</a>
                     </td>

@@ -37,6 +37,10 @@
             <column name="path" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
+            <column name="provider" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="asset_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>

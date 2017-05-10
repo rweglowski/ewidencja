@@ -47,6 +47,13 @@ public class AssetResource {
         this.assetRepository = assetRepository;
     }
 
+    /**
+     * POST  /assets : Create a new asset.
+     *
+     * @param asset the asset to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new asset, or with status 400 (Bad Request) if the asset has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
     @PostMapping("/assets")
     @Timed
     public ResponseEntity<Asset> createAsset(@Valid @RequestBody Asset asset) throws URISyntaxException {
@@ -62,6 +69,15 @@ public class AssetResource {
             .body(result);
     }
 
+    /**
+     * PUT  /assets : Updates an existing asset.
+     *
+     * @param asset the asset to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated asset,
+     * or with status 400 (Bad Request) if the asset is not valid,
+     * or with status 500 (Internal Server Error) if the asset couldnt be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
     @PutMapping("/assets")
     @Timed
     public ResponseEntity<Asset> updateAsset(@Valid @RequestBody Asset asset) throws URISyntaxException {
@@ -75,6 +91,14 @@ public class AssetResource {
             .body(result);
     }
 
+    /**
+     * GET  /assets : get all the assets.
+     *
+     * @param pageable the pagination information
+     * @param filter the filter of the request
+     * @return the ResponseEntity with status 200 (OK) and the list of assets in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/assets")
     @Timed
     public ResponseEntity<List<Asset>> getAllAssets(@ApiParam Pageable pageable, @RequestParam(required = false) String filter)
@@ -92,7 +116,12 @@ public class AssetResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-
+    /**
+     * GET  /assets/:id : get the "id" asset.
+     *
+     * @param id the id of the asset to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the asset, or with status 404 (Not Found)
+     */
     @GetMapping("/assets/{id}")
     @Timed
     public ResponseEntity<Asset> getAsset(@PathVariable Long id) {
@@ -101,6 +130,12 @@ public class AssetResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(asset));
     }
 
+    /**
+     * DELETE  /assets/:id : delete the "id" asset.
+     *
+     * @param id the id of the asset to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
     @DeleteMapping("/assets/{id}")
     @Timed
     public ResponseEntity<Void> deleteAsset(@PathVariable Long id) {

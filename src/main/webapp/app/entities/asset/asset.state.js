@@ -128,6 +128,7 @@
                                 assetGroup: null,
                                 name: null,
                                 inventoryCode: null,
+                                remission: null,
                                 id: null
                             };
                         }

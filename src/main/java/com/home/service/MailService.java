@@ -11,6 +11,7 @@ import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -56,7 +57,7 @@ public class MailService {
     }
 
     @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml, String attachmentName) {
         log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
 
@@ -64,6 +65,10 @@ public class MailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, CharEncoding.UTF_8);
+            if(!attachmentName.equals(null)){
+                FileSystemResource file = new FileSystemResource(attachmentName);
+                message.addAttachment(file.getFilename(), file);
+            }
             message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
@@ -84,7 +89,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("activationEmail", context);
         String subject = messageSource.getMessage("email.activation.title", null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
     @Async
@@ -96,7 +101,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("creationEmail", context);
         String subject = messageSource.getMessage("email.activation.title", null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
     @Async
@@ -108,29 +113,29 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("passwordResetEmail", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
     @Async
-    public void sendPtPdf(Employee employee){
+    public void sendPtPdf(Employee employee, String attachmentName){
         log.debug("Sending PT pdf to "+employee.getEmail());
         Context context = new Context();
         context.setVariable("employee", employee);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("ptPdfEmail", context);
         String subject = "PT Document";
-        sendEmail(employee.getEmail(), subject, content, false, true);
+        sendEmail(employee.getEmail(), subject, content, true, true, attachmentName + "_Pt.pdf");
     }
 
     @Async
-    public void sendOtPdf(Employee employee){
+    public void sendOtPdf(Employee employee, String attachmentName){
         log.debug("Sending OT pdf to "+employee.getEmail());
         Context context = new Context();
         context.setVariable("employee", employee);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("otPdfEmail", context);
         String subject = "OT Document";
-        sendEmail(employee.getEmail(), subject, content, false, true);
+        sendEmail(employee.getEmail(), subject, content, true, true, attachmentName + "_Ot.pdf");
     }
 
     @Async
@@ -141,6 +146,6 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("assetEndReminderEmail", context);
         String subject = "Asset reminder";
-        sendEmail(reminder.getEmail(), subject, content, false, true);
+        sendEmail(reminder.getEmail(), subject, content, false, true, null);
     }
 }

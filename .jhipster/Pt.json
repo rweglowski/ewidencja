@@ -37,6 +37,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170407180300",

@@ -23,6 +23,7 @@
                     <th><span>Date</span></th>
                     <th><span>Name</span></th>
                     <th><span>Path</span></th>
+                    <th><span>Provider</span></th>
                     <th><span>Asset</span></th>
                     <th><span>Employee</span></th>
                     <th></th>
@@ -35,6 +36,7 @@
                         <td>{{ot.date | date:'mediumDate'}}</td>
                     <td>{{ot.name}}</td>
                     <td>{{ot.path}}</td>
+                    <td>{{ot.provider}}</td>
                     <td>
                         <a ui-sref="asset-detail({id:ot.asset.id})">{{ot.asset.inventoryCode}}</a>
                     </td>

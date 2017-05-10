@@ -87,6 +87,14 @@
         {
             "fieldName": "inventoryCode",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "remission",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
         }
     ],
     "changelogDate": "20170407174117",

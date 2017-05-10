@@ -32,6 +32,9 @@ public class Pt implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "note")
+    private String note;
+
     @ManyToOne
     private Asset asset;
 
@@ -89,6 +92,19 @@ public class Pt implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public Pt note(String note) {
+        this.note = note;
+        return this;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Asset getAsset() {
@@ -169,6 +185,7 @@ public class Pt implements Serializable {
             ", date='" + date + "'" +
             ", path='" + path + "'" +
             ", name='" + name + "'" +
+            ", note='" + note + "'" +
             '}';
     }
 }

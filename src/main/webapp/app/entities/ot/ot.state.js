@@ -99,6 +99,7 @@
                                 date: null,
                                 name: null,
                                 path: null,
+                                provider: null,
                                 id: null
                             };
                         }

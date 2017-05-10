@@ -51,6 +51,9 @@ public class OtResourceIntTest {
     private static final String DEFAULT_PATH = "AAAAAAAAAA";
     private static final String UPDATED_PATH = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PROVIDER = "AAAAAAAAAA";
+    private static final String UPDATED_PROVIDER = "BBBBBBBBBB";
+
     @Autowired
     private OtRepository otRepository;
 
@@ -91,7 +94,8 @@ public class OtResourceIntTest {
                 .place(DEFAULT_PLACE)
                 .date(DEFAULT_DATE)
                 .name(DEFAULT_NAME)
-                .path(DEFAULT_PATH);
+                .path(DEFAULT_PATH)
+                .provider(DEFAULT_PROVIDER);
         return ot;
     }
 
@@ -120,6 +124,7 @@ public class OtResourceIntTest {
         assertThat(testOt.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testOt.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testOt.getPath()).isEqualTo(DEFAULT_PATH);
+        assertThat(testOt.getProvider()).isEqualTo(DEFAULT_PROVIDER);
     }
 
     @Test
@@ -144,6 +149,24 @@ public class OtResourceIntTest {
 
     @Test
     @Transactional
+    public void checkProviderIsRequired() throws Exception {
+        int databaseSizeBeforeTest = otRepository.findAll().size();
+        // set the field null
+        ot.setProvider(null);
+
+        // Create the Ot, which fails.
+
+        restOtMockMvc.perform(post("/api/ots")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ot)))
+            .andExpect(status().isBadRequest());
+
+        List<Ot> otList = otRepository.findAll();
+        assertThat(otList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOts() throws Exception {
         // Initialize the database
         otRepository.saveAndFlush(ot);
@@ -156,7 +179,8 @@ public class OtResourceIntTest {
             .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())));
+            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
+            .andExpect(jsonPath("$.[*].provider").value(hasItem(DEFAULT_PROVIDER.toString())));
     }
 
     @Test
@@ -173,7 +197,8 @@ public class OtResourceIntTest {
             .andExpect(jsonPath("$.place").value(DEFAULT_PLACE.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()));
+            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()))
+            .andExpect(jsonPath("$.provider").value(DEFAULT_PROVIDER.toString()));
     }
 
     @Test
@@ -197,7 +222,8 @@ public class OtResourceIntTest {
                 .place(UPDATED_PLACE)
                 .date(UPDATED_DATE)
                 .name(UPDATED_NAME)
-                .path(UPDATED_PATH);
+                .path(UPDATED_PATH)
+                .provider(UPDATED_PROVIDER);
 
         restOtMockMvc.perform(put("/api/ots")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -212,6 +238,7 @@ public class OtResourceIntTest {
         assertThat(testOt.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testOt.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testOt.getPath()).isEqualTo(UPDATED_PATH);
+        assertThat(testOt.getProvider()).isEqualTo(UPDATED_PROVIDER);
     }
 
     @Test

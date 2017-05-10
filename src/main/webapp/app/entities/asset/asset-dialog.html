@@ -13,18 +13,17 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.asset.id" readonly />
         </div>
-
         <div class="form-group">
-            <label class="control-label" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                   ng-model="vm.asset.name"
-                   required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.name.$error.required">
-                    This field is required.
-                </p>
-            </div>
+            <label class="control-label" for="field_registrationCode">Registration Code</label>
+            <input type="text" class="form-control" name="registrationCode" id="field_registrationCode"
+                    ng-model="vm.asset.registrationCode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_barcode">Barcode</label>
+            <input type="text" class="form-control" name="barcode" id="field_barcode"
+                    ng-model="vm.asset.barcode"
+                    />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_symbol">Symbol</label>
@@ -120,6 +119,41 @@
                     ng-model="vm.asset.assetGroup"
                     />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.asset.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_inventoryCode">Inventory Code</label>
+            <input type="text" class="form-control" name="inventoryCode" id="field_inventoryCode"
+                    ng-model="vm.asset.inventoryCode"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_remission">Remission</label>
+            <input type="number" class="form-control" name="remission" id="field_remission"
+                    ng-model="vm.asset.remission"
+                    min="0"/>
+            <div ng-show="editForm.remission.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.remission.$error.min" translate-value-min="0">
+                    This field should be at least 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.remission.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="field_employee">Employee</label>
             <select class="form-control" id="field_employee" multiple name="employee" ng-model="vm.asset.employees" ng-options="employee as employee.surname for employee in vm.employees track by employee.id"></select>

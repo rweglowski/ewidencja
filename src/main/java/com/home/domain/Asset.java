@@ -69,7 +69,11 @@ public class Asset implements Serializable {
     @Column(name = "inventory_code")
     private String inventoryCode;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Min(value = 0)
+    @Column(name = "remission")
+    private Long remission;
+
+    @ManyToMany
     @JoinTable(name = "asset_employee",
                joinColumns = @JoinColumn(name="assets_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="employees_id", referencedColumnName="id"))
@@ -260,6 +264,19 @@ public class Asset implements Serializable {
         this.inventoryCode = inventoryCode;
     }
 
+    public Long getRemission() {
+        return remission;
+    }
+
+    public Asset remission(Long remission) {
+        this.remission = remission;
+        return this;
+    }
+
+    public void setRemission(Long remission) {
+        this.remission = remission;
+    }
+
     public Set<Employee> getEmployees() {
         return employees;
     }
@@ -360,6 +377,7 @@ public class Asset implements Serializable {
             ", assetGroup='" + assetGroup + "'" +
             ", name='" + name + "'" +
             ", inventoryCode='" + inventoryCode + "'" +
+            ", remission='" + remission + "'" +
             '}';
     }
 }

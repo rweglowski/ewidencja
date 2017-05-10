@@ -79,6 +79,9 @@ public class AssetResourceIntTest {
     private static final String DEFAULT_INVENTORY_CODE = "AAAAAAAAAA";
     private static final String UPDATED_INVENTORY_CODE = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_REMISSION = 0L;
+    private static final Long UPDATED_REMISSION = 1L;
+
     @Autowired
     private AssetRepository assetRepository;
 
@@ -128,7 +131,8 @@ public class AssetResourceIntTest {
                 .value(DEFAULT_VALUE)
                 .assetGroup(DEFAULT_ASSET_GROUP)
                 .name(DEFAULT_NAME)
-                .inventoryCode(DEFAULT_INVENTORY_CODE);
+                .inventoryCode(DEFAULT_INVENTORY_CODE)
+                .remission(DEFAULT_REMISSION);
         return asset;
     }
 
@@ -166,6 +170,7 @@ public class AssetResourceIntTest {
         assertThat(testAsset.getAssetGroup()).isEqualTo(DEFAULT_ASSET_GROUP);
         assertThat(testAsset.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testAsset.getInventoryCode()).isEqualTo(DEFAULT_INVENTORY_CODE);
+        assertThat(testAsset.getRemission()).isEqualTo(DEFAULT_REMISSION);
     }
 
     @Test
@@ -265,7 +270,8 @@ public class AssetResourceIntTest {
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.intValue())))
             .andExpect(jsonPath("$.[*].assetGroup").value(hasItem(DEFAULT_ASSET_GROUP.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].inventoryCode").value(hasItem(DEFAULT_INVENTORY_CODE.toString())));
+            .andExpect(jsonPath("$.[*].inventoryCode").value(hasItem(DEFAULT_INVENTORY_CODE.toString())))
+            .andExpect(jsonPath("$.[*].remission").value(hasItem(DEFAULT_REMISSION.intValue())));
     }
 
     @Test
@@ -291,7 +297,8 @@ public class AssetResourceIntTest {
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.intValue()))
             .andExpect(jsonPath("$.assetGroup").value(DEFAULT_ASSET_GROUP.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.inventoryCode").value(DEFAULT_INVENTORY_CODE.toString()));
+            .andExpect(jsonPath("$.inventoryCode").value(DEFAULT_INVENTORY_CODE.toString()))
+            .andExpect(jsonPath("$.remission").value(DEFAULT_REMISSION.intValue()));
     }
 
     @Test
@@ -324,7 +331,8 @@ public class AssetResourceIntTest {
                 .value(UPDATED_VALUE)
                 .assetGroup(UPDATED_ASSET_GROUP)
                 .name(UPDATED_NAME)
-                .inventoryCode(UPDATED_INVENTORY_CODE);
+                .inventoryCode(UPDATED_INVENTORY_CODE)
+                .remission(UPDATED_REMISSION);
 
         restAssetMockMvc.perform(put("/api/assets")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -348,6 +356,7 @@ public class AssetResourceIntTest {
         assertThat(testAsset.getAssetGroup()).isEqualTo(UPDATED_ASSET_GROUP);
         assertThat(testAsset.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testAsset.getInventoryCode()).isEqualTo(UPDATED_INVENTORY_CODE);
+        assertThat(testAsset.getRemission()).isEqualTo(UPDATED_REMISSION);
     }
 
     @Test
