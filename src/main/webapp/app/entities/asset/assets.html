@@ -19,40 +19,38 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="inventoryCode"><span>Inventory Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="registrationCode"><span>Registration Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="barcode"><span>Barcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="symbol"><span>Symbol</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="purchaseDate"><span>Purchase Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDateOfUse"><span>Start Date Of Use</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="endDateOfUse"><span>End Date Of Use</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="liquidationDate"><span>Liquidation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="startDateOfUse"><span>Start Date Of Use</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="value"><span>Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="assetGroup"><span>Asset Group</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="inventoryCode"><span>Inventory Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="remission"><span>Remission</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assetGroup"><span>Asset Group</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="asset in vm.assets track by asset.id">
                     <td><a ui-sref="asset-detail({id:asset.id})">{{asset.id}}</a></td>
+                    <td>{{asset.inventoryCode}}</td>
                     <td>{{asset.registrationCode}}</td>
-                    <td>{{asset.barcode}}</td>
+                    <td>{{asset.name}}</td>
                     <td>{{asset.symbol}}</td>
-                        <td>{{asset.purchaseDate | date:'mediumDate'}}</td>
-                        <td>{{asset.endDateOfUse | date:'mediumDate'}}</td>
-                        <td>{{asset.liquidationDate | date:'mediumDate'}}</td>
-                        <td>{{asset.startDateOfUse | date:'mediumDate'}}</td>
+                    <td>{{asset.purchaseDate | date:'mediumDate'}}</td>
+                    <td>{{asset.startDateOfUse | date:'mediumDate'}}</td>
+                    <td>{{asset.endDateOfUse | date:'mediumDate'}}</td>
+                    <td>{{asset.liquidationDate | date:'mediumDate'}}</td>
                     <td>{{asset.status}}</td>
                     <td>{{asset.description}}</td>
                     <td>{{asset.value}}</td>
-                    <td>{{asset.assetGroup}}</td>
-                    <td>{{asset.name}}</td>
-                    <td>{{asset.inventoryCode}}</td>
                     <td>{{asset.remission}}</td>
+                    <td>{{asset.assetGroup}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -6,6 +6,8 @@ import com.home.service.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class PtCommandHandler {
 
@@ -16,10 +18,11 @@ public class PtCommandHandler {
     private PdfService pdfService;
 
     public void handle(Pt pt){
+        pt.setDate(LocalDate.now());
         pdfService.createPtPdf(pt);
 
         for(Employee recipient : pt.getRecipients()){
-            mailService.sendPtPdf(recipient, pt.getName());
+            mailService.sendPtPdf(pt, recipient, pt.getName());
         }
     }
 }

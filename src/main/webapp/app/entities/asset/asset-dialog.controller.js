@@ -5,9 +5,9 @@
         .module('ewidencjaApp')
         .controller('AssetDialogController', AssetDialogController);
 
-    AssetDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Asset', 'Employee', 'Ot', 'Pt'];
+    AssetDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Asset', 'Employee', 'Pt', 'Ot'];
 
-    function AssetDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Asset, Employee, Ot, Pt) {
+    function AssetDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Asset, Employee, Pt, Ot) {
         var vm = this;
 
         vm.asset = entity;
@@ -16,8 +16,8 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.employees = Employee.query();
-        vm.ots = Ot.query();
         vm.pts = Pt.query();
+        vm.ots = Ot.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

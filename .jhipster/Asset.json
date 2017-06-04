@@ -10,15 +10,14 @@
             "otherEntityRelationshipName": "asset"
         },
         {
-            "relationshipName": "ot",
-            "otherEntityName": "ot",
-            "relationshipType": "one-to-one",
-            "ownerSide": false,
+            "relationshipName": "pt",
+            "otherEntityName": "pt",
+            "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "asset"
         },
         {
-            "relationshipName": "pt",
-            "otherEntityName": "pt",
+            "relationshipName": "ot",
+            "otherEntityName": "ot",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "asset"
         }

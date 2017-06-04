@@ -2,20 +2,18 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "asset",
-            "otherEntityName": "asset",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "inventoryCode",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "ot"
-        },
-        {
             "relationshipName": "employee",
             "otherEntityName": "employee",
             "relationshipType": "many-to-many",
             "otherEntityField": "surname",
             "ownerSide": true,
             "otherEntityRelationshipName": "ot"
+        },
+        {
+            "relationshipName": "asset",
+            "otherEntityName": "asset",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "inventoryCode"
         }
     ],
     "fields": [
@@ -29,10 +27,6 @@
         },
         {
             "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "path",
             "fieldType": "String"
         },
         {

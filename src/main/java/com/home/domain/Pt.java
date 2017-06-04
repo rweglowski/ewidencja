@@ -25,9 +25,6 @@ public class Pt implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "path")
-    private String path;
-
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
@@ -66,19 +63,6 @@ public class Pt implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public Pt path(String path) {
-        this.path = path;
-        return this;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public String getName() {
@@ -183,7 +167,6 @@ public class Pt implements Serializable {
         return "Pt{" +
             "id=" + id +
             ", date='" + date + "'" +
-            ", path='" + path + "'" +
             ", name='" + name + "'" +
             ", note='" + note + "'" +
             '}';

@@ -4,6 +4,14 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.asset.name}}</span>
+        </dd>
+        <dt><span>Inventory Code</span></dt>
+        <dd>
+            <span>{{vm.asset.inventoryCode}}</span>
+        </dd>
         <dt><span>Registration Code</span></dt>
         <dd>
             <span>{{vm.asset.registrationCode}}</span>
@@ -20,6 +28,10 @@
         <dd>
             <span>{{vm.asset.purchaseDate | date:'mediumDate'}}</span>
         </dd>
+        <dt><span>Start Date Of Use</span></dt>
+        <dd>
+            <span>{{vm.asset.startDateOfUse | date:'mediumDate'}}</span>
+        </dd>
         <dt><span>End Date Of Use</span></dt>
         <dd>
             <span>{{vm.asset.endDateOfUse | date:'mediumDate'}}</span>
@@ -27,10 +39,6 @@
         <dt><span>Liquidation Date</span></dt>
         <dd>
             <span>{{vm.asset.liquidationDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span>Start Date Of Use</span></dt>
-        <dd>
-            <span>{{vm.asset.startDateOfUse | date:'mediumDate'}}</span>
         </dd>
         <dt><span>Status</span></dt>
         <dd>
@@ -44,21 +52,13 @@
         <dd>
             <span>{{vm.asset.value}}</span>
         </dd>
-        <dt><span>Asset Group</span></dt>
-        <dd>
-            <span>{{vm.asset.assetGroup}}</span>
-        </dd>
-        <dt><span>Name</span></dt>
-        <dd>
-            <span>{{vm.asset.name}}</span>
-        </dd>
-        <dt><span>Inventory Code</span></dt>
-        <dd>
-            <span>{{vm.asset.inventoryCode}}</span>
-        </dd>
         <dt><span>Remission</span></dt>
         <dd>
             <span>{{vm.asset.remission}}</span>
+        </dd>
+        <dt><span>Asset Group</span></dt>
+        <dd>
+            <span>{{vm.asset.assetGroup}}</span>
         </dd>
         <dt><span>Employee</span></dt>
         <dd>

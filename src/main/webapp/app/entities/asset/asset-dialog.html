@@ -13,18 +13,20 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.asset.id" readonly />
         </div>
+
         <div class="form-group">
-            <label class="control-label" for="field_registrationCode">Registration Code</label>
-            <input type="text" class="form-control" name="registrationCode" id="field_registrationCode"
-                    ng-model="vm.asset.registrationCode"
-                    />
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                   ng-model="vm.asset.name"
+                   required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_barcode">Barcode</label>
-            <input type="text" class="form-control" name="barcode" id="field_barcode"
-                    ng-model="vm.asset.barcode"
-                    />
-        </div>
+
         <div class="form-group">
             <label class="control-label" for="field_symbol">Symbol</label>
             <input type="text" class="form-control" name="symbol" id="field_symbol"
@@ -47,6 +49,18 @@
                 </p>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_startDateOfUse">Start Date Of Use</label>
+            <div class="input-group">
+                <input id="field_startDateOfUse" type="text" class="form-control" name="startDateOfUse" uib-datepicker-popup="{{dateformat}}" ng-model="vm.asset.startDateOfUse" is-open="vm.datePickerOpenStatus.startDateOfUse"
+                />
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDateOfUse')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="control-label" for="field_endDateOfUse">End Date Of Use</label>
                 <div class="input-group">
@@ -64,16 +78,6 @@
                     />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('liquidationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_startDateOfUse">Start Date Of Use</label>
-                <div class="input-group">
-                    <input id="field_startDateOfUse" type="text" class="form-control" name="startDateOfUse" uib-datepicker-popup="{{dateformat}}" ng-model="vm.asset.startDateOfUse" is-open="vm.datePickerOpenStatus.startDateOfUse"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDateOfUse')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
         </div>
@@ -114,44 +118,26 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" for="field_remission">Remission</label>
+            <input type="number" class="form-control" name="remission" id="field_remission"
+                   ng-model="vm.asset.remission"
+                   min="0"/>
+            <div ng-show="editForm.remission.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.remission.$error.min" translate-value-min="0">
+                    This field should be at least 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.remission.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" for="field_assetGroup">Asset Group</label>
             <input type="text" class="form-control" name="assetGroup" id="field_assetGroup"
                     ng-model="vm.asset.assetGroup"
                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.asset.name"
-                    required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_inventoryCode">Inventory Code</label>
-            <input type="text" class="form-control" name="inventoryCode" id="field_inventoryCode"
-                    ng-model="vm.asset.inventoryCode"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_remission">Remission</label>
-            <input type="number" class="form-control" name="remission" id="field_remission"
-                    ng-model="vm.asset.remission"
-                    min="0"/>
-            <div ng-show="editForm.remission.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.remission.$error.min" translate-value-min="0">
-                    This field should be at least 0.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.remission.$error.number">
-                    This field should be a number.
-                </p>
-            </div>
         </div>
 
         <div class="form-group">

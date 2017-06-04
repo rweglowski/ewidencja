@@ -5,9 +5,9 @@
         .module('ewidencjaApp')
         .controller('OtDetailController', OtDetailController);
 
-    OtDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Ot', 'Asset', 'Employee'];
+    OtDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Ot', 'Employee', 'Asset'];
 
-    function OtDetailController($scope, $rootScope, $stateParams, previousState, entity, Ot, Asset, Employee) {
+    function OtDetailController($scope, $rootScope, $stateParams, previousState, entity, Ot, Employee, Asset) {
         var vm = this;
 
         vm.ot = entity;

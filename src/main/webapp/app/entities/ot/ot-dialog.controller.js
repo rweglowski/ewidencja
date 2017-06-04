@@ -5,9 +5,9 @@
         .module('ewidencjaApp')
         .controller('OtDialogController', OtDialogController);
 
-    OtDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Ot', 'Asset', 'Employee'];
+    OtDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Ot', 'Employee', 'Asset'];
 
-    function OtDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Ot, Asset, Employee) {
+    function OtDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Ot, Employee, Asset) {
         var vm = this;
 
         vm.ot = entity;
@@ -15,16 +15,8 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.assets = Asset.query({filter: 'ot-is-null'});
-        $q.all([vm.ot.$promise, vm.assets.$promise]).then(function() {
-            if (!vm.ot.asset || !vm.ot.asset.id) {
-                return $q.reject();
-            }
-            return Asset.get({id : vm.ot.asset.id}).$promise;
-        }).then(function(asset) {
-            vm.assets.push(asset);
-        });
         vm.employees = Employee.query();
+        vm.assets = Asset.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

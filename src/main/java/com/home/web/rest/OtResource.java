@@ -53,9 +53,10 @@ public class OtResource {
         if (ot.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new ot cannot already have an ID")).body(null);
         }
-
-        handler.handle(ot);
         Ot result = otRepository.save(ot);
+        handler.handle(result);
+        otRepository.save(result);
+
         return ResponseEntity.created(new URI("/api/ots/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

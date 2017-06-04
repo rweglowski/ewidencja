@@ -34,16 +34,14 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="path" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="provider" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+
             <column name="asset_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

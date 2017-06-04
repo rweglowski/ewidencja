@@ -3,6 +3,7 @@ package com.home.service;
 import com.home.domain.AssetEndingSoonReminder;
 import com.home.domain.Employee;
 import com.home.domain.Ot;
+import com.home.domain.Pt;
 import com.home.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -88,7 +89,7 @@ public class MailService {
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("activationEmail", context);
-        String subject = messageSource.getMessage("email.activation.title", null, locale);
+        String subject = "Aktywacja konta";
         sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
@@ -100,7 +101,7 @@ public class MailService {
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("creationEmail", context);
-        String subject = messageSource.getMessage("email.activation.title", null, locale);
+        String subject = "Witamy w naszym serwisie!";
         sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
@@ -112,18 +113,19 @@ public class MailService {
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("passwordResetEmail", context);
-        String subject = messageSource.getMessage("email.reset.title", null, locale);
+        String subject = "Zmiana hasła w serwisie";
         sendEmail(user.getEmail(), subject, content, false, true, null);
     }
 
     @Async
-    public void sendPtPdf(Employee employee, String attachmentName){
+    public void sendPtPdf(Pt pt, Employee employee, String attachmentName){
         log.debug("Sending PT pdf to "+employee.getEmail());
         Context context = new Context();
         context.setVariable("employee", employee);
+        context.setVariable("pt", pt);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process("ptPdfEmail", context);
-        String subject = "PT Document";
+        String subject = "Nowy protokół zdawczo-odbiorczy środką trwałego";
         sendEmail(employee.getEmail(), subject, content, true, true, attachmentName + "_Pt.pdf");
     }
 

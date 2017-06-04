@@ -48,9 +48,6 @@ public class OtResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PATH = "AAAAAAAAAA";
-    private static final String UPDATED_PATH = "BBBBBBBBBB";
-
     private static final String DEFAULT_PROVIDER = "AAAAAAAAAA";
     private static final String UPDATED_PROVIDER = "BBBBBBBBBB";
 
@@ -94,7 +91,6 @@ public class OtResourceIntTest {
                 .place(DEFAULT_PLACE)
                 .date(DEFAULT_DATE)
                 .name(DEFAULT_NAME)
-                .path(DEFAULT_PATH)
                 .provider(DEFAULT_PROVIDER);
         return ot;
     }
@@ -123,7 +119,6 @@ public class OtResourceIntTest {
         assertThat(testOt.getPlace()).isEqualTo(DEFAULT_PLACE);
         assertThat(testOt.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testOt.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testOt.getPath()).isEqualTo(DEFAULT_PATH);
         assertThat(testOt.getProvider()).isEqualTo(DEFAULT_PROVIDER);
     }
 
@@ -179,7 +174,6 @@ public class OtResourceIntTest {
             .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
             .andExpect(jsonPath("$.[*].provider").value(hasItem(DEFAULT_PROVIDER.toString())));
     }
 
@@ -197,7 +191,6 @@ public class OtResourceIntTest {
             .andExpect(jsonPath("$.place").value(DEFAULT_PLACE.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()))
             .andExpect(jsonPath("$.provider").value(DEFAULT_PROVIDER.toString()));
     }
 
@@ -222,7 +215,6 @@ public class OtResourceIntTest {
                 .place(UPDATED_PLACE)
                 .date(UPDATED_DATE)
                 .name(UPDATED_NAME)
-                .path(UPDATED_PATH)
                 .provider(UPDATED_PROVIDER);
 
         restOtMockMvc.perform(put("/api/ots")
@@ -237,7 +229,6 @@ public class OtResourceIntTest {
         assertThat(testOt.getPlace()).isEqualTo(UPDATED_PLACE);
         assertThat(testOt.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testOt.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testOt.getPath()).isEqualTo(UPDATED_PATH);
         assertThat(testOt.getProvider()).isEqualTo(UPDATED_PROVIDER);
     }
 

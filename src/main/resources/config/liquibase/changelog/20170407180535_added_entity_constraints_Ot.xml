@@ -8,12 +8,6 @@
     -->
     <changeSet id="20170407180535-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="asset_id"
-                                 baseTableName="ot"
-                                 constraintName="fk_ot_asset_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="asset"/>
-
         <addForeignKeyConstraint baseColumnNames="ots_id"
                                  baseTableName="ot_employee"
                                  constraintName="fk_ot_employee_ots_id"
@@ -25,5 +19,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
         
+        <addForeignKeyConstraint baseColumnNames="asset_id"
+                                 baseTableName="ot"
+                                 constraintName="fk_ot_asset_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="asset"/>
+
     </changeSet>
 </databaseChangeLog>

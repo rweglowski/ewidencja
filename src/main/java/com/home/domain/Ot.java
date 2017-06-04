@@ -31,22 +31,18 @@ public class Ot implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "path")
-    private String path;
-
     @NotNull
     @Column(name = "provider", nullable = false)
     private String provider;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Asset asset;
 
     @ManyToMany
     @JoinTable(name = "ot_employee",
                joinColumns = @JoinColumn(name="ots_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="employees_id", referencedColumnName="id"))
     private Set<Employee> employees = new HashSet<>();
+
+    @ManyToOne
+    private Asset asset;
 
     public Long getId() {
         return id;
@@ -95,19 +91,6 @@ public class Ot implements Serializable {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public Ot path(String path) {
-        this.path = path;
-        return this;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public String getProvider() {
         return provider;
     }
@@ -119,19 +102,6 @@ public class Ot implements Serializable {
 
     public void setProvider(String provider) {
         this.provider = provider;
-    }
-
-    public Asset getAsset() {
-        return asset;
-    }
-
-    public Ot asset(Asset asset) {
-        this.asset = asset;
-        return this;
-    }
-
-    public void setAsset(Asset asset) {
-        this.asset = asset;
     }
 
     public Set<Employee> getEmployees() {
@@ -157,6 +127,19 @@ public class Ot implements Serializable {
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public Ot asset(Asset asset) {
+        this.asset = asset;
+        return this;
+    }
+
+    public void setAsset(Asset asset) {
+        this.asset = asset;
     }
 
     @Override
@@ -186,7 +169,6 @@ public class Ot implements Serializable {
             ", place='" + place + "'" +
             ", date='" + date + "'" +
             ", name='" + name + "'" +
-            ", path='" + path + "'" +
             ", provider='" + provider + "'" +
             '}';
     }

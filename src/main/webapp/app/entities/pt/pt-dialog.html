@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myPtLabel">Create or edit a Pt</h4>
+        <h4 class="modal-title" id="myPtLabel">Create or edit a PT document</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -14,38 +14,16 @@
                     ng-model="vm.pt.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_date">Date</label>
-                <div class="input-group">
-                    <input id="field_date" type="text" class="form-control" name="date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.pt.date" is-open="vm.datePickerOpenStatus.date"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_path">Path</label>
-            <input type="text" class="form-control" name="path" id="field_path"
-                    ng-model="vm.pt.path"
-                    />
-        </div>
-        <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.pt.name"
-                    required/>
+                   ng-model="vm.pt.name"
+                   required/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_note">Note</label>
-            <input type="text" class="form-control" name="note" id="field_note"
-                    ng-model="vm.pt.note"
-                    />
         </div>
 
         <div class="form-group">
@@ -54,6 +32,23 @@
                 <option value=""></option>
             </select>
         </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" for="field_date">Date</label>-->
+                <!--<div class="input-group">-->
+                    <!--<input id="field_date" type="text" class="form-control" name="date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.pt.date" is-open="vm.datePickerOpenStatus.date"-->
+                    <!--/>-->
+                    <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label class="control-label" for="field_note">Note</label>
+            <input type="text" class="form-control" name="note" id="field_note"
+                    ng-model="vm.pt.note"
+                    />
+        </div>
+
         <div class="form-group">
             <label for="field_forwarder">Forwarder</label>
             <select class="form-control" id="field_forwarder" name="forwarder" ng-model="vm.pt.forwarder" ng-options="employee as employee.surname for employee in vm.employees track by employee.id">

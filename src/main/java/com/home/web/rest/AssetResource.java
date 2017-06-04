@@ -107,7 +107,7 @@ public class AssetResource {
             log.debug("REST request to get all Assets where ot is null");
             return new ResponseEntity<>(StreamSupport
                 .stream(assetRepository.findAll().spliterator(), false)
-                .filter(asset -> asset.getOt() == null)
+                .filter(asset -> asset.getOts() == null)
                 .collect(Collectors.toList()), HttpStatus.OK);
         }
         log.debug("REST request to get a page of Assets");

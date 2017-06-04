@@ -16,23 +16,19 @@
         <dd>
             <span>{{vm.ot.name}}</span>
         </dd>
-        <dt><span>Path</span></dt>
-        <dd>
-            <span>{{vm.ot.path}}</span>
-        </dd>
         <dt><span>Provider</span></dt>
         <dd>
             <span>{{vm.ot.provider}}</span>
-        </dd>
-        <dt><span>Asset</span></dt>
-        <dd>
-            <a ui-sref="asset-detail({id:vm.ot.asset.id})">{{vm.ot.asset.inventoryCode}}</a>
         </dd>
         <dt><span>Employee</span></dt>
         <dd>
             <span ng-repeat="employee in vm.ot.employees">
                 <a ui-sref="employee-detail({id: employee.id})">{{employee.surname}}</a>{{$last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span>Asset</span></dt>
+        <dd>
+            <a ui-sref="asset-detail({id:vm.ot.asset.id})">{{vm.ot.asset.inventoryCode}}</a>
         </dd>
     </dl>
 

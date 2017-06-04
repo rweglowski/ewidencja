@@ -28,10 +28,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "path",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [

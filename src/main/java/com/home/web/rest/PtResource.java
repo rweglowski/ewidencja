@@ -53,8 +53,9 @@ public class PtResource {
         if (pt.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new pt cannot already have an ID")).body(null);
         }
-        handler.handle(pt);
         Pt result = ptRepository.save(pt);
+        handler.handle(result);
+        ptRepository.save(pt);
         return ResponseEntity.created(new URI("/api/pts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

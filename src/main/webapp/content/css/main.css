@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background: #333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
@@ -15,7 +15,7 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 Development Ribbon
 ========================================================================== */
 .ribbon {
-    background-color: #a00;
+    background-color: #aa0000;
     box-shadow: 0 0 10px #888;
     left: -3.5em;
     moz-box-shadow: 0 0 10px #888;
@@ -46,7 +46,20 @@ Development Ribbon
     text-shadow: 0 0 5px #444;
     pointer-events: none;
 }
-
+.hipster {
+    display: inline-block;
+    width: 597px;
+    height: 497px;
+    background: url(../images/eqmain2.png) no-repeat center top;
+    background-size: contain;
+}
+.asset {
+    display: inline-block;
+    width: 597px;
+    height: 497px;
+    background: url(../images/asset2.png) no-repeat center top;
+    background-size: contain;
+}
 /* ==========================================================================
 Version number in navbar
 ========================================================================== */
@@ -54,6 +67,27 @@ Version number in navbar
     font-size: 10px;
     color: #ccc
 }
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+}
+
+.navbar-default {
+    background-color: #43853d;
+    border-color: #43853d;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #dbdbdb;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #45ad37;
+}
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+
+
 
 /* ==========================================================================
 Browser Upgrade Prompt
@@ -95,14 +129,6 @@ Main page styles
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
-}
-
-.hipster {
-    display: inline-block;
-    width: 347px;
-    height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
-    background-size: contain;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */

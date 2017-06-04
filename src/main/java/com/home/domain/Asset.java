@@ -79,13 +79,13 @@ public class Asset implements Serializable {
                inverseJoinColumns = @JoinColumn(name="employees_id", referencedColumnName="id"))
     private Set<Employee> employees = new HashSet<>();
 
-    @OneToOne(mappedBy = "asset")
-    @JsonIgnore
-    private Ot ot;
-
     @OneToMany(mappedBy = "asset")
     @JsonIgnore
     private Set<Pt> pts = new HashSet<>();
+
+    @OneToMany(mappedBy = "asset")
+    @JsonIgnore
+    private Set<Ot> ots = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -302,19 +302,6 @@ public class Asset implements Serializable {
         this.employees = employees;
     }
 
-    public Ot getOt() {
-        return ot;
-    }
-
-    public Asset ot(Ot ot) {
-        this.ot = ot;
-        return this;
-    }
-
-    public void setOt(Ot ot) {
-        this.ot = ot;
-    }
-
     public Set<Pt> getPts() {
         return pts;
     }
@@ -338,6 +325,31 @@ public class Asset implements Serializable {
 
     public void setPts(Set<Pt> pts) {
         this.pts = pts;
+    }
+
+    public Set<Ot> getOts() {
+        return ots;
+    }
+
+    public Asset ots(Set<Ot> ots) {
+        this.ots = ots;
+        return this;
+    }
+
+    public Asset addOt(Ot ot) {
+        this.ots.add(ot);
+        ot.setAsset(this);
+        return this;
+    }
+
+    public Asset removeOt(Ot ot) {
+        this.ots.remove(ot);
+        ot.setAsset(null);
+        return this;
+    }
+
+    public void setOts(Set<Ot> ots) {
+        this.ots = ots;
     }
 
     @Override
